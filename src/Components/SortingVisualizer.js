@@ -1,17 +1,19 @@
 import "../css/SortingVisualizer.css"
 import ArrayBar from "./ArrayBar"
 import { useState, useEffect } from "react"
+import BubbleSort from "./SortingAlgorithms/BubbleSort"
 
 const SortingVisualizer = () => {
   useEffect(() => {
     initiateArray()
   }, [])
 
+  const [animationSpeed, setSpeed] = useState(10)
   const [array, setArray] = useState([])
 
   const initiateArray = () => {
     let temp = []
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
       temp.push(generateRandomNumber(1, 200))
     }
     setArray(temp)
@@ -19,36 +21,34 @@ const SortingVisualizer = () => {
   }
 
   const bubbleSort = () => {
-    var arr = [...array]
-    let n = array.length
-    console.log("bubble sort")
+    let animations = BubbleSort(array)
 
-    for (var i = 0; i < n - 1; i++) {
-      for (var j = 0; j < n - i - 1; j++) {
-        // setTimeout(
-        //   (function (j) {
-        //     return function () {
-        //       if (arr[j] > arr[j + 1]) {
-        //         var temp = arr[j]
-        //         arr[j] = arr[j + 1]
-        //         arr[j + 1] = temp
-        //       }
-        //       setArray(arr)
-        //     }
-        //   })(j),
-        //   i * n + j
-        // )
+    let n = animations.length
 
-        if (arr[j] > arr[j + 1]) {
-          var temp = arr[j]
-          arr[j] = arr[j + 1]
-          arr[j + 1] = temp
-        }
-        setArray(arr)
-      }
+    for (let i = 0; i < n; i++) {
+      const arrayBars = document.getElementsByClassName("histbar")
+      setTimeout(() => {
+        let j = animations[i]
+        arrayBars[j].style.backgroundColor = "#00ff00"
+        arrayBars[j + 1].style.backgroundColor = "#00ff00"
+      }, animationSpeed * i)
+      setTimeout(() => {
+        let j = animations[i]
+        var temp = array[j]
+        array[j] = array[j + 1]
+        array[j + 1] = temp
+        arrayBars[j].style.backgroundColor = "#ff0000"
+        arrayBars[j + 1].style.backgroundColor = "#ff0000"
+        setArray([...array])
+      }, animationSpeed * i + animationSpeed / 2)
+      //   setTimeout(() => {
+      //     let j = animations[i]
+      //     var temp = array[j]
+      //     array[j] = array[j + 1]
+      //     array[j + 1] = temp
+      //     setArray([...array])
+      //   }, 5 * i)
     }
-
-    console.log(array)
   }
 
   return (
@@ -56,7 +56,18 @@ const SortingVisualizer = () => {
       hello world
       <button onClick={initiateArray}>button</button>
       <button onClick={bubbleSort}>Bubble Sort</button>
-      {array[0]}
+      <div class="slidecontainer">
+        <input
+          type="range"
+          min="2"
+          max="20"
+          value={animationSpeed}
+          class="slider"
+          id="myRange"
+          onChange={(e) => { setSpeed(e.target.value)}}
+        />
+        {animationSpeed}
+      </div>
       <div className="histogram">
         {array.map((i) => (
           <div
