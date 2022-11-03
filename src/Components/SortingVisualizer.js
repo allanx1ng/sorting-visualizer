@@ -14,7 +14,7 @@ const SortingVisualizer = () => {
   const [arrayType, setType] = useState('Random')
 
 
-  // GENERATE RANDOM ARRAY 
+  // GENERATE NEW ARRAY BASED ON PROGRAM STATE
   const initiateArray = () => {
     switch (arrayType) {
       case('Random'):
@@ -32,11 +32,13 @@ const SortingVisualizer = () => {
 
   }
 
-  // SETUP
+  // Runs on page reload
   useEffect(() => {
     initiateArray()
   }, [])
 
+
+  // generates a new array whenever the array type changes
   useEffect(() => {
     initiateArray()
   }, [arrayType])
@@ -82,7 +84,7 @@ const SortingVisualizer = () => {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
         let j = animations[i]
-        arrayBars[j].style.backgroundColor = "#ff0000"
+        arrayBars[j].style.backgroundColor = "#ff0000"              //changes color of the values currently being compared
         arrayBars[j + 1].style.backgroundColor = "#ff0000"
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
@@ -90,7 +92,7 @@ const SortingVisualizer = () => {
         var temp = array[j]
         array[j] = array[j + 1]
         array[j + 1] = temp
-        arrayBars[j].style.backgroundColor = "#d6ffb7"
+        arrayBars[j].style.backgroundColor = "#d6ffb7"              //changes the color of the bars back to default color
         arrayBars[j + 1].style.backgroundColor = "#d6ffb7"
         setArray([...array])
       }, (22 - animationSpeed) * i + (22 - animationSpeed))
@@ -111,7 +113,7 @@ const SortingVisualizer = () => {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
         let j = animations[i]
-        arrayBars[j].style.backgroundColor = "#ff0000"
+        arrayBars[j].style.backgroundColor = "#ff0000"              //changes color of the values currently being compared
         arrayBars[j + 1].style.backgroundColor = "#ff0000"
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
@@ -119,7 +121,7 @@ const SortingVisualizer = () => {
         var temp = array[j]
         array[j] = array[j + 1]
         array[j + 1] = temp
-        arrayBars[j].style.backgroundColor = "#d6ffb7"
+        arrayBars[j].style.backgroundColor = "#d6ffb7"               //changes the color of the bars back to default color
         arrayBars[j + 1].style.backgroundColor = "#d6ffb7"
         setArray([...array])
       }, (22 - animationSpeed) * i + (22 - animationSpeed))
@@ -140,7 +142,7 @@ const SortingVisualizer = () => {
       setTimeout(() => {
         let j = animations[i]
         let k = animations[i+1]
-        arrayBars[j].style.backgroundColor = "#ff0000"
+        arrayBars[j].style.backgroundColor = "#ff0000"               //changes color of the values currently being compared
         arrayBars[k].style.backgroundColor = "#ff0000"
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
@@ -149,7 +151,7 @@ const SortingVisualizer = () => {
         var temp = array[j]
         array[j] = array[k]
         array[k] = temp
-        arrayBars[j].style.backgroundColor = "#d6ffb7"
+        arrayBars[j].style.backgroundColor = "#d6ffb7"               //changes the color of the bars back to default color
         arrayBars[k].style.backgroundColor = "#d6ffb7"
         setArray([...array])
       }, (22 - animationSpeed) * i + (22 - animationSpeed))
@@ -166,26 +168,26 @@ const SortingVisualizer = () => {
       hello world
       {/* GENERATE RANDOM ARRAY */}
       <button onClick={() => {
-        (arrayType == "Random") ? generateRandomArray() : setType("Random")
+        (arrayType == "Random") ? generateRandomArray() : setType("Random")             //Random array button
        
       }} disabled={performingAction}>
         Generate Random Array
       </button>
       {/* GENERATE SORTED ARRAY */}
       <button onClick={() => {
-        (arrayType == "Sorted") ? generateSortedArray() : setType("Sorted")
+        (arrayType == "Sorted") ? generateSortedArray() : setType("Sorted")             //Sorted array button
       }} disabled={performingAction}>
         Generate Sorted Array
       </button>
       {/* GENERATE REVERSE SORTED ARRAY */}
       <button onClick={() => {
-       (arrayType == "Reverse") ? generateReverseSortedArray() : setType("Reverse")
+       (arrayType == "Reverse") ? generateReverseSortedArray() : setType("Reverse")     //Reverse sorted array button
         
       }} disabled={performingAction}>
         Generate Reverse Sorted Array
       </button>
       {/* BUBBLE SORT */}
-      <button
+      <button                                       // Bubble sort button
         onClick={() => {
           setAction(true)
           bubbleSort()
@@ -195,7 +197,7 @@ const SortingVisualizer = () => {
         Bubble Sort
       </button>
       {/* INSERTION SORT */}
-      <button
+      <button                                       // Insertion sort button
         onClick={() => {
           setAction(true)
           insertionSort()
@@ -205,7 +207,7 @@ const SortingVisualizer = () => {
         Insertion Sort
       </button>
       {/* QUICK SORT */}
-      <button
+      <button                                       // Quicksort button
         onClick={() => {
           setAction(true)
           quickSort()
@@ -214,8 +216,8 @@ const SortingVisualizer = () => {
       >
         Quick Sort
       </button>
-      <div class="slidecontainer">
-        <input
+      <div class="slidecontainer">                    
+        <input                                      // Set animation speed
           type="range"
           min="1"
           max="20"
@@ -227,10 +229,11 @@ const SortingVisualizer = () => {
           }}
           disabled={performingAction}
         />
+        Set Animation Speed
         {animationSpeed}
       </div>
       <div class="slidecontainer">
-        <input
+        <input                                      // Set array size
           type="range"
           min="20"
           max="100"
@@ -243,11 +246,11 @@ const SortingVisualizer = () => {
           }}
           disabled={performingAction}
         />
-
+        Set Array Size
         {arraySize}
       </div>
       <div className="histogram">
-        {array.map((i) => (
+        {array.map((i) => (                           // Displays the array elements as bars on the screen
           <div
             className="histbar"
             style={{
@@ -260,6 +263,8 @@ const SortingVisualizer = () => {
   )
 }
 
+
+// Random number generator from [min, max]
 const generateRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
