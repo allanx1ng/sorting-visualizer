@@ -5,20 +5,67 @@ import InsertionSort from "./SortingAlgorithms/InsertionSort"
 import QuickSort from "./SortingAlgorithms/QuickSort"
 
 const SortingVisualizer = () => {
-  // SETUP
-  useEffect(() => {
-    initiateArray()
-  }, [])
+  
 
   const [animationSpeed, setSpeed] = useState(10)
   const [arraySize, setSize] = useState(50)
   const [array, setArray] = useState([])
   const [performingAction, setAction] = useState(false)
+  const [arrayType, setType] = useState('Random')
 
+
+  // GENERATE RANDOM ARRAY 
   const initiateArray = () => {
+    switch (arrayType) {
+      case('Random'):
+        generateRandomArray()
+        break
+      case('Sorted'):
+        generateSortedArray()
+        break
+      case("Reverse"):
+        generateReverseSortedArray()
+        break
+      default:
+        generateRandomArray()
+    }
+
+  }
+
+  // SETUP
+  useEffect(() => {
+    initiateArray()
+  }, [])
+
+  useEffect(() => {
+    initiateArray()
+  }, [arrayType])
+
+  // GENERATE RANDOM ARRAY 
+  const generateRandomArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
       temp.push(generateRandomNumber(1, 200))
+    }
+    setArray(temp)
+    console.log(array)
+  }
+
+  // GENERATE SORTED ARRAY 
+  const generateSortedArray = () => {
+    let temp = []
+    for (let i = 0; i < arraySize; i++) {
+      temp.push(2*(i+1))
+    }
+    setArray(temp)
+    console.log(array)
+  }
+
+  // GENERATE REVERSE SORTED ARRAY 
+  const generateReverseSortedArray = () => {
+    let temp = []
+    for (let i = 0; i < arraySize; i++) {
+      temp.push(2*(arraySize-i))
     }
     setArray(temp)
     console.log(array)
@@ -117,9 +164,24 @@ const SortingVisualizer = () => {
   return (
     <div className="functionbar">
       hello world
-      {/* GENERATE NEW ARRAY */}
-      <button onClick={initiateArray} disabled={performingAction}>
-        button
+      {/* GENERATE RANDOM ARRAY */}
+      <button onClick={() => {
+        setType("Random")
+      }} disabled={performingAction}>
+        Generate Random Array
+      </button>
+      {/* GENERATE SORTED ARRAY */}
+      <button onClick={() => {
+        setType("Sorted")
+      }} disabled={performingAction}>
+        Generate Sorted Array
+      </button>
+      {/* GENERATE REVERSE SORTED ARRAY */}
+      <button onClick={() => {
+        setType("Reverse")
+        
+      }} disabled={performingAction}>
+        Generate Reverse Sorted Array
       </button>
       {/* BUBBLE SORT */}
       <button
