@@ -82,18 +82,18 @@ const SortingVisualizer = () => {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
         let j = animations[i]
-        arrayBars[j].style.backgroundColor = "#00ff00"
-        arrayBars[j + 1].style.backgroundColor = "#00ff00"
+        arrayBars[j].style.backgroundColor = "#ff0000"
+        arrayBars[j + 1].style.backgroundColor = "#ff0000"
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
         let j = animations[i]
         var temp = array[j]
         array[j] = array[j + 1]
         array[j + 1] = temp
-        arrayBars[j].style.backgroundColor = "#ff0000"
-        arrayBars[j + 1].style.backgroundColor = "#ff0000"
+        arrayBars[j].style.backgroundColor = "#d6ffb7"
+        arrayBars[j + 1].style.backgroundColor = "#d6ffb7"
         setArray([...array])
-      }, (22 - animationSpeed) * i + (22 - animationSpeed) / 2)
+      }, (22 - animationSpeed) * i + (22 - animationSpeed))
     }
     setTimeout(() => {
       setAction(false)
@@ -111,18 +111,18 @@ const SortingVisualizer = () => {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
         let j = animations[i]
-        arrayBars[j].style.backgroundColor = "#00ff00"
-        arrayBars[j + 1].style.backgroundColor = "#00ff00"
+        arrayBars[j].style.backgroundColor = "#ff0000"
+        arrayBars[j + 1].style.backgroundColor = "#ff0000"
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
         let j = animations[i]
         var temp = array[j]
         array[j] = array[j + 1]
         array[j + 1] = temp
-        arrayBars[j].style.backgroundColor = "#ff0000"
-        arrayBars[j + 1].style.backgroundColor = "#ff0000"
+        arrayBars[j].style.backgroundColor = "#d6ffb7"
+        arrayBars[j + 1].style.backgroundColor = "#d6ffb7"
         setArray([...array])
-      }, (22 - animationSpeed) * i + (22 - animationSpeed) / 2)
+      }, (22 - animationSpeed) * i + (22 - animationSpeed))
     }
     setTimeout(() => {
       setAction(false)
@@ -140,8 +140,8 @@ const SortingVisualizer = () => {
       setTimeout(() => {
         let j = animations[i]
         let k = animations[i+1]
-        arrayBars[j].style.backgroundColor = "#00ff00"
-        arrayBars[k].style.backgroundColor = "#00ff00"
+        arrayBars[j].style.backgroundColor = "#ff0000"
+        arrayBars[k].style.backgroundColor = "#ff0000"
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
         let j = animations[i]
@@ -149,10 +149,10 @@ const SortingVisualizer = () => {
         var temp = array[j]
         array[j] = array[k]
         array[k] = temp
-        arrayBars[j].style.backgroundColor = "#ff0000"
-        arrayBars[k].style.backgroundColor = "#ff0000"
+        arrayBars[j].style.backgroundColor = "#d6ffb7"
+        arrayBars[k].style.backgroundColor = "#d6ffb7"
         setArray([...array])
-      }, (22 - animationSpeed) * i + (22 - animationSpeed) / 2)
+      }, (22 - animationSpeed) * i + (22 - animationSpeed))
     }
     setTimeout(() => {
       setAction(false)
@@ -173,13 +173,13 @@ const SortingVisualizer = () => {
       </button>
       {/* GENERATE SORTED ARRAY */}
       <button onClick={() => {
-        setType("Sorted")
+        (arrayType == "Sorted") ? generateSortedArray() : setType("Sorted")
       }} disabled={performingAction}>
         Generate Sorted Array
       </button>
       {/* GENERATE REVERSE SORTED ARRAY */}
       <button onClick={() => {
-        setType("Reverse")
+       (arrayType == "Reverse") ? generateReverseSortedArray() : setType("Reverse")
         
       }} disabled={performingAction}>
         Generate Reverse Sorted Array
@@ -217,7 +217,7 @@ const SortingVisualizer = () => {
       <div class="slidecontainer">
         <input
           type="range"
-          min="2"
+          min="1"
           max="20"
           value={animationSpeed}
           class="slider"

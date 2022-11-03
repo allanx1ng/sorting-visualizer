@@ -4,13 +4,14 @@
     height: 500px;
     border-width: 2px;
     border-color: #000;
+    background-color: #000;
     border-style: solid;
     justify-content: center;
 }
 
 .histbar {
     width: 9px;
-    background-color: #f00;
+    background-color: #d6ffb7;
     margin: 0 1px;
     display: inline-block;
 }
