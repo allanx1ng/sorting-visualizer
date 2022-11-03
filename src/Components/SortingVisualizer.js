@@ -1,13 +1,11 @@
 import "../css/SortingVisualizer.css"
-import ArrayBar from "./ArrayBar"
 import { useState, useEffect } from "react"
 import BubbleSort from "./SortingAlgorithms/BubbleSort"
 import InsertionSort from "./SortingAlgorithms/InsertionSort"
+import QuickSort from "./SortingAlgorithms/QuickSort"
 
 const SortingVisualizer = () => {
-
-
-// SETUP
+  // SETUP
   useEffect(() => {
     initiateArray()
   }, [])
@@ -26,7 +24,6 @@ const SortingVisualizer = () => {
     console.log(array)
   }
 
-
   // BUBBLE SORT
 
   const bubbleSort = () => {
@@ -40,7 +37,7 @@ const SortingVisualizer = () => {
         let j = animations[i]
         arrayBars[j].style.backgroundColor = "#00ff00"
         arrayBars[j + 1].style.backgroundColor = "#00ff00"
-      }, (22- animationSpeed) * i)
+      }, (22 - animationSpeed) * i)
       setTimeout(() => {
         let j = animations[i]
         var temp = array[j]
@@ -49,13 +46,12 @@ const SortingVisualizer = () => {
         arrayBars[j].style.backgroundColor = "#ff0000"
         arrayBars[j + 1].style.backgroundColor = "#ff0000"
         setArray([...array])
-      }, (22- animationSpeed) * i + (22- animationSpeed) / 2)
+      }, (22 - animationSpeed) * i + (22 - animationSpeed) / 2)
     }
     setTimeout(() => {
       setAction(false)
-    }, (22- animationSpeed) * n)
+    }, (22 - animationSpeed) * n)
   }
-
 
   // INSERTION SORT
 
@@ -70,7 +66,7 @@ const SortingVisualizer = () => {
         let j = animations[i]
         arrayBars[j].style.backgroundColor = "#00ff00"
         arrayBars[j + 1].style.backgroundColor = "#00ff00"
-      }, (22- animationSpeed) * i)
+      }, (22 - animationSpeed) * i)
       setTimeout(() => {
         let j = animations[i]
         var temp = array[j]
@@ -79,20 +75,53 @@ const SortingVisualizer = () => {
         arrayBars[j].style.backgroundColor = "#ff0000"
         arrayBars[j + 1].style.backgroundColor = "#ff0000"
         setArray([...array])
-      }, (22- animationSpeed) * i + (22- animationSpeed) / 2)
+      }, (22 - animationSpeed) * i + (22 - animationSpeed) / 2)
     }
     setTimeout(() => {
       setAction(false)
-    }, (22- animationSpeed) * n)
+    }, (22 - animationSpeed) * n)
   }
-  
+
+  // QUICKSORT
+  const quickSort = () => {
+    let animations = QuickSort(array)
+    console.log(animations)
+    let n = animations.length
+
+    for (let i = 0; i < n; i+=2) {
+      const arrayBars = document.getElementsByClassName("histbar")
+      setTimeout(() => {
+        let j = animations[i]
+        let k = animations[i+1]
+        arrayBars[j].style.backgroundColor = "#00ff00"
+        arrayBars[k].style.backgroundColor = "#00ff00"
+      }, (22 - animationSpeed) * i)
+      setTimeout(() => {
+        let j = animations[i]
+        let k = animations[i+1]
+        var temp = array[j]
+        array[j] = array[k]
+        array[k] = temp
+        arrayBars[j].style.backgroundColor = "#ff0000"
+        arrayBars[k].style.backgroundColor = "#ff0000"
+        setArray([...array])
+      }, (22 - animationSpeed) * i + (22 - animationSpeed) / 2)
+    }
+    setTimeout(() => {
+      setAction(false)
+    }, (22 - animationSpeed) * n)
+  }
+
+  // RETURN HTML
 
   return (
     <div className="functionbar">
       hello world
+      {/* GENERATE NEW ARRAY */}
       <button onClick={initiateArray} disabled={performingAction}>
         button
       </button>
+      {/* BUBBLE SORT */}
       <button
         onClick={() => {
           setAction(true)
@@ -102,6 +131,7 @@ const SortingVisualizer = () => {
       >
         Bubble Sort
       </button>
+      {/* INSERTION SORT */}
       <button
         onClick={() => {
           setAction(true)
@@ -110,6 +140,16 @@ const SortingVisualizer = () => {
         disabled={performingAction}
       >
         Insertion Sort
+      </button>
+      {/* QUICK SORT */}
+      <button
+        onClick={() => {
+          setAction(true)
+          quickSort()
+        }}
+        disabled={performingAction}
+      >
+        Quick Sort
       </button>
       <div class="slidecontainer">
         <input
