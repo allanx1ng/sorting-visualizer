@@ -166,7 +166,8 @@ const SortingVisualizer = () => {
       hello world
       {/* GENERATE RANDOM ARRAY */}
       <button onClick={() => {
-        setType("Random")
+        (arrayType == "Random") ? generateRandomArray() : setType("Random")
+       
       }} disabled={performingAction}>
         Generate Random Array
       </button>
