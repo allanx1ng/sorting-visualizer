@@ -1,17 +1,18 @@
 .histogram {
     margin: 5px;
-    width: 1000px;
-    height: 500px;
+    width: 100vw;
+    height: 80vh;
     border-width: 2px;
     border-color: #000;
     background-color: #000;
     border-style: solid;
     justify-content: center;
+    display: flex;
+    transform: scaleY(-1);
 }
 
 .histbar {
     width: 9px;
     background-color: #d6ffb7;
     margin: 0 1px;
-    display: inline-block;
 }

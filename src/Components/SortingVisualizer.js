@@ -47,7 +47,7 @@ const SortingVisualizer = () => {
   const generateRandomArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push(generateRandomNumber(1, 200))
+      temp.push(generateRandomNumber(1, 400))
     }
     setArray(temp)
     console.log(array)
@@ -57,7 +57,7 @@ const SortingVisualizer = () => {
   const generateSortedArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push(2*(i+1))
+      temp.push(4*(i+1))
     }
     setArray(temp)
     console.log(array)
@@ -67,7 +67,7 @@ const SortingVisualizer = () => {
   const generateReverseSortedArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push(2*(arraySize-i))
+      temp.push(4*(arraySize-i))
     }
     setArray(temp)
     console.log(array)
@@ -168,20 +168,20 @@ const SortingVisualizer = () => {
       hello world
       {/* GENERATE RANDOM ARRAY */}
       <button onClick={() => {
-        (arrayType == "Random") ? generateRandomArray() : setType("Random")             //Random array button
+        (arrayType === "Random") ? generateRandomArray() : setType("Random")             //Random array button
        
       }} disabled={performingAction}>
         Generate Random Array
       </button>
       {/* GENERATE SORTED ARRAY */}
       <button onClick={() => {
-        (arrayType == "Sorted") ? generateSortedArray() : setType("Sorted")             //Sorted array button
+        (arrayType === "Sorted") ? generateSortedArray() : setType("Sorted")             //Sorted array button
       }} disabled={performingAction}>
         Generate Sorted Array
       </button>
       {/* GENERATE REVERSE SORTED ARRAY */}
       <button onClick={() => {
-       (arrayType == "Reverse") ? generateReverseSortedArray() : setType("Reverse")     //Reverse sorted array button
+       (arrayType === "Reverse") ? generateReverseSortedArray() : setType("Reverse")     //Reverse sorted array button
         
       }} disabled={performingAction}>
         Generate Reverse Sorted Array
