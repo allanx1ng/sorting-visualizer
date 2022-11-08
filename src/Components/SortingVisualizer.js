@@ -56,7 +56,7 @@ const SortingVisualizer = () => {
   const generateSortedArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push(4 * (i + 1))
+      temp.push((300*3)/(arraySize*2) * (i + 1))
     }
     setArray(temp)
     console.log(array)
@@ -66,7 +66,7 @@ const SortingVisualizer = () => {
   const generateReverseSortedArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push(4 * (arraySize - i))
+      temp.push((300*3)/(arraySize*2) * (arraySize - i))
     }
     setArray(temp)
     console.log(array)
@@ -189,7 +189,6 @@ const SortingVisualizer = () => {
 
   return (
     <div className="functionbar">
-      hello world
       {/* GENERATE RANDOM ARRAY */}
       <button
         onClick={() => {
@@ -199,6 +198,8 @@ const SortingVisualizer = () => {
       >
         Generate Random Array
       </button>
+
+
       {/* GENERATE SORTED ARRAY */}
       <button
         onClick={() => {
@@ -208,6 +209,8 @@ const SortingVisualizer = () => {
       >
         Generate Sorted Array
       </button>
+
+
       {/* GENERATE REVERSE SORTED ARRAY */}
       <button
         onClick={() => {
@@ -219,6 +222,8 @@ const SortingVisualizer = () => {
       >
         Generate Reverse Sorted Array
       </button>
+
+
       {/* BUBBLE SORT */}
       <button // Bubble sort button
         onClick={() => {
@@ -229,6 +234,8 @@ const SortingVisualizer = () => {
       >
         Bubble Sort
       </button>
+
+
       {/* INSERTION SORT */}
       <button // Insertion sort button
         onClick={() => {
@@ -239,6 +246,8 @@ const SortingVisualizer = () => {
       >
         Insertion Sort
       </button>
+
+
       {/* QUICK SORT */}
       <button // Quicksort button
         onClick={() => {
@@ -249,6 +258,8 @@ const SortingVisualizer = () => {
       >
         Quick Sort
       </button>
+
+
       {/* MERGE SORT */}
       <button // Quicksort button
         onClick={() => {
@@ -259,6 +270,8 @@ const SortingVisualizer = () => {
       >
         Merge Sort
       </button>
+
+
       <div class="slidecontainer">
         <input // Set animation speed
           type="range"
@@ -272,9 +285,11 @@ const SortingVisualizer = () => {
           }}
           disabled={performingAction}
         />
-        Set Animation Speed
+        {"Set Animation Speed: "}
         {animationSpeed}
       </div>
+
+
       <div class="slidecontainer">
         <input // Set array size
           type="range"
@@ -289,9 +304,11 @@ const SortingVisualizer = () => {
           }}
           disabled={performingAction}
         />
-        Set Array Size
+        {"Set Array Size: "}
         {arraySize}
       </div>
+
+
       <div className="histogram">
         {array.map(
           (
