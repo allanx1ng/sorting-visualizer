@@ -3,33 +3,33 @@ import { useState, useEffect } from "react"
 import BubbleSort from "./SortingAlgorithms/BubbleSort"
 import InsertionSort from "./SortingAlgorithms/InsertionSort"
 import QuickSort from "./SortingAlgorithms/QuickSort"
+import MergeSort from "./SortingAlgorithms/MergeSort"
 
 const SortingVisualizer = () => {
-  
+  const COLOR1 = "#ff0000"
+  const COLOR2 = "#2a93d5"
 
   const [animationSpeed, setSpeed] = useState(10)
   const [arraySize, setSize] = useState(50)
   const [array, setArray] = useState([])
   const [performingAction, setAction] = useState(false)
-  const [arrayType, setType] = useState('Random')
-
+  const [arrayType, setType] = useState("Random")
 
   // GENERATE NEW ARRAY BASED ON PROGRAM STATE
   const initiateArray = () => {
     switch (arrayType) {
-      case('Random'):
+      case "Random":
         generateRandomArray()
         break
-      case('Sorted'):
+      case "Sorted":
         generateSortedArray()
         break
-      case("Reverse"):
+      case "Reverse":
         generateReverseSortedArray()
         break
       default:
         generateRandomArray()
     }
-
   }
 
   // Runs on page reload
@@ -37,13 +37,12 @@ const SortingVisualizer = () => {
     initiateArray()
   }, [])
 
-
   // generates a new array whenever the array type changes
   useEffect(() => {
     initiateArray()
   }, [arrayType])
 
-  // GENERATE RANDOM ARRAY 
+  // GENERATE RANDOM ARRAY
   const generateRandomArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
@@ -53,21 +52,21 @@ const SortingVisualizer = () => {
     console.log(array)
   }
 
-  // GENERATE SORTED ARRAY 
+  // GENERATE SORTED ARRAY
   const generateSortedArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push(4*(i+1))
+      temp.push(4 * (i + 1))
     }
     setArray(temp)
     console.log(array)
   }
 
-  // GENERATE REVERSE SORTED ARRAY 
+  // GENERATE REVERSE SORTED ARRAY
   const generateReverseSortedArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push(4*(arraySize-i))
+      temp.push(4 * (arraySize - i))
     }
     setArray(temp)
     console.log(array)
@@ -84,17 +83,17 @@ const SortingVisualizer = () => {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
         let j = animations[i]
-        arrayBars[j].style.backgroundColor = "#ff0000"              //changes color of the values currently being compared
-        arrayBars[j + 1].style.backgroundColor = "#ff0000"
+        arrayBars[j].style.backgroundColor = COLOR1 //changes color of the values currently being compared
+        arrayBars[j + 1].style.backgroundColor = COLOR1
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
         let j = animations[i]
         var temp = array[j]
         array[j] = array[j + 1]
         array[j + 1] = temp
-        arrayBars[j].style.backgroundColor = "#d6ffb7"              //changes the color of the bars back to default color
-        arrayBars[j + 1].style.backgroundColor = "#d6ffb7"
         setArray([...array])
+        arrayBars[j].style.backgroundColor = COLOR2 //changes the color of the bars back to default color
+        arrayBars[j + 1].style.backgroundColor = COLOR2
       }, (22 - animationSpeed) * i + (22 - animationSpeed))
     }
     setTimeout(() => {
@@ -113,17 +112,17 @@ const SortingVisualizer = () => {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
         let j = animations[i]
-        arrayBars[j].style.backgroundColor = "#ff0000"              //changes color of the values currently being compared
-        arrayBars[j + 1].style.backgroundColor = "#ff0000"
+        arrayBars[j].style.backgroundColor = COLOR1 //changes color of the values currently being compared
+        arrayBars[j + 1].style.backgroundColor = COLOR1
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
         let j = animations[i]
         var temp = array[j]
         array[j] = array[j + 1]
         array[j + 1] = temp
-        arrayBars[j].style.backgroundColor = "#d6ffb7"               //changes the color of the bars back to default color
-        arrayBars[j + 1].style.backgroundColor = "#d6ffb7"
         setArray([...array])
+        arrayBars[j].style.backgroundColor = COLOR2 //changes the color of the bars back to default color
+        arrayBars[j + 1].style.backgroundColor = COLOR2
       }, (22 - animationSpeed) * i + (22 - animationSpeed))
     }
     setTimeout(() => {
@@ -137,23 +136,48 @@ const SortingVisualizer = () => {
     console.log(animations)
     let n = animations.length
 
+    for (let i = 0; i < n; i ++) {
+      const arrayBars = document.getElementsByClassName("histbar")
+      setTimeout(() => {
+        let [a,b] = animations[i]
+        arrayBars[a].style.backgroundColor = COLOR1 //changes color of the values currently being compared
+        arrayBars[b].style.backgroundColor = COLOR1
+      }, (22 - animationSpeed) * i)
+      setTimeout(() => {
+        let [a,b] = animations[i]
+        var temp = array[a]
+        array[a] = array[b]
+        array[b] = temp
+        setArray([...array])
+        arrayBars[a].style.backgroundColor = COLOR2 //changes the color of the bars back to default color
+        arrayBars[b].style.backgroundColor = COLOR2
+      }, (22 - animationSpeed) * i + (22 - animationSpeed))
+    }
+    setTimeout(() => {
+      setAction(false)
+    }, (22 - animationSpeed) * n)
+  }
+
+  // MERGE SORT
+  const mergeSort = () => {
+    let animations = MergeSort(array)
+    console.log(animations)
+    let n = animations.length
+
     for (let i = 0; i < n; i+=2) {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
-        let j = animations[i]
-        let k = animations[i+1]
-        arrayBars[j].style.backgroundColor = "#ff0000"               //changes color of the values currently being compared
-        arrayBars[k].style.backgroundColor = "#ff0000"
+        let [a,b] = animations[i]
+        arrayBars[a].style.backgroundColor = COLOR1 //changes color of the values currently being compared
+        arrayBars[b].style.backgroundColor = COLOR1
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
-        let j = animations[i]
-        let k = animations[i+1]
-        var temp = array[j]
-        array[j] = array[k]
-        array[k] = temp
-        arrayBars[j].style.backgroundColor = "#d6ffb7"               //changes the color of the bars back to default color
-        arrayBars[k].style.backgroundColor = "#d6ffb7"
+        let [c,d] = animations[i+1]
+        array[c] = d
         setArray([...array])
+        let [a,b] = animations[i]
+        arrayBars[a].style.backgroundColor = COLOR2 //changes the color of the bars back to default color
+        arrayBars[b].style.backgroundColor = COLOR2
       }, (22 - animationSpeed) * i + (22 - animationSpeed))
     }
     setTimeout(() => {
@@ -167,27 +191,36 @@ const SortingVisualizer = () => {
     <div className="functionbar">
       hello world
       {/* GENERATE RANDOM ARRAY */}
-      <button onClick={() => {
-        (arrayType === "Random") ? generateRandomArray() : setType("Random")             //Random array button
-       
-      }} disabled={performingAction}>
+      <button
+        onClick={() => {
+          arrayType === "Random" ? generateRandomArray() : setType("Random") //Random array button
+        }}
+        disabled={performingAction}
+      >
         Generate Random Array
       </button>
       {/* GENERATE SORTED ARRAY */}
-      <button onClick={() => {
-        (arrayType === "Sorted") ? generateSortedArray() : setType("Sorted")             //Sorted array button
-      }} disabled={performingAction}>
+      <button
+        onClick={() => {
+          arrayType === "Sorted" ? generateSortedArray() : setType("Sorted") //Sorted array button
+        }}
+        disabled={performingAction}
+      >
         Generate Sorted Array
       </button>
       {/* GENERATE REVERSE SORTED ARRAY */}
-      <button onClick={() => {
-       (arrayType === "Reverse") ? generateReverseSortedArray() : setType("Reverse")     //Reverse sorted array button
-        
-      }} disabled={performingAction}>
+      <button
+        onClick={() => {
+          arrayType === "Reverse"
+            ? generateReverseSortedArray()
+            : setType("Reverse") //Reverse sorted array button
+        }}
+        disabled={performingAction}
+      >
         Generate Reverse Sorted Array
       </button>
       {/* BUBBLE SORT */}
-      <button                                       // Bubble sort button
+      <button // Bubble sort button
         onClick={() => {
           setAction(true)
           bubbleSort()
@@ -197,7 +230,7 @@ const SortingVisualizer = () => {
         Bubble Sort
       </button>
       {/* INSERTION SORT */}
-      <button                                       // Insertion sort button
+      <button // Insertion sort button
         onClick={() => {
           setAction(true)
           insertionSort()
@@ -207,7 +240,7 @@ const SortingVisualizer = () => {
         Insertion Sort
       </button>
       {/* QUICK SORT */}
-      <button                                       // Quicksort button
+      <button // Quicksort button
         onClick={() => {
           setAction(true)
           quickSort()
@@ -216,8 +249,18 @@ const SortingVisualizer = () => {
       >
         Quick Sort
       </button>
-      <div class="slidecontainer">                    
-        <input                                      // Set animation speed
+      {/* MERGE SORT */}
+      <button // Quicksort button
+        onClick={() => {
+          setAction(true)
+          mergeSort()
+        }}
+        disabled={performingAction}
+      >
+        Merge Sort
+      </button>
+      <div class="slidecontainer">
+        <input // Set animation speed
           type="range"
           min="1"
           max="20"
@@ -233,10 +276,10 @@ const SortingVisualizer = () => {
         {animationSpeed}
       </div>
       <div class="slidecontainer">
-        <input                                      // Set array size
+        <input // Set array size
           type="range"
           min="20"
-          max="100"
+          max="150"
           value={arraySize}
           class="slider"
           id="myRange"
@@ -250,19 +293,22 @@ const SortingVisualizer = () => {
         {arraySize}
       </div>
       <div className="histogram">
-        {array.map((i) => (                           // Displays the array elements as bars on the screen
-          <div
-            className="histbar"
-            style={{
-              height: `${2 * i}px`,
-            }}
-          ></div>
-        ))}
+        {array.map(
+          (
+            i // Displays the array elements as bars on the screen
+          ) => (
+            <div
+              className="histbar"
+              style={{
+                height: `${i / 6}vh`,
+              }}
+            ></div>
+          )
+        )}
       </div>
     </div>
   )
 }
-
 
 // Random number generator from [min, max]
 const generateRandomNumber = (min, max) => {

@@ -2,9 +2,9 @@
     margin: 5px;
     width: 100vw;
     height: 80vh;
-    border-width: 2px;
+    /* border-width: 2px;
     border-color: #000;
-    background-color: #000;
+    background-color: #000; */
     border-style: solid;
     justify-content: center;
     display: flex;
@@ -13,6 +13,21 @@
 
 .histbar {
     width: 9px;
-    background-color: #d6ffb7;
+    background-color: #2a93d5;
+    /* background: #d6ffb7; */
     margin: 0 1px;
+}
+
+button {
+    color: red;
+    margin: 5px 5px 5px 5px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: #fff;
+}
+
+button:hover {
+    background-color: #ccc;
+    cursor: pointer;
 }

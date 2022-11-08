@@ -29,8 +29,7 @@ const QuickSort = (array) => {
     let temp = arr[a]
     arr[a] = arr[b]
     arr[b] = temp
-    animations.push(a)
-    animations.push(b)
+    animations.push([a,b])
   }
 
   quickSort(arr, 0, arr.length-1)
