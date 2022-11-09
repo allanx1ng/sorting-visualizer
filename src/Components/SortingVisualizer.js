@@ -56,7 +56,7 @@ const SortingVisualizer = () => {
   const generateSortedArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push((300*3)/(arraySize*2) * (i + 1))
+      temp.push(((300 * 3) / (arraySize * 2)) * (i + 1))
     }
     setArray(temp)
     console.log(array)
@@ -66,7 +66,7 @@ const SortingVisualizer = () => {
   const generateReverseSortedArray = () => {
     let temp = []
     for (let i = 0; i < arraySize; i++) {
-      temp.push((300*3)/(arraySize*2) * (arraySize - i))
+      temp.push(((300 * 3) / (arraySize * 2)) * (arraySize - i))
     }
     setArray(temp)
     console.log(array)
@@ -136,15 +136,15 @@ const SortingVisualizer = () => {
     console.log(animations)
     let n = animations.length
 
-    for (let i = 0; i < n; i ++) {
+    for (let i = 0; i < n; i++) {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
-        let [a,b] = animations[i]
+        let [a, b] = animations[i]
         arrayBars[a].style.backgroundColor = COLOR1 //changes color of the values currently being compared
         arrayBars[b].style.backgroundColor = COLOR1
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
-        let [a,b] = animations[i]
+        let [a, b] = animations[i]
         var temp = array[a]
         array[a] = array[b]
         array[b] = temp
@@ -164,18 +164,18 @@ const SortingVisualizer = () => {
     console.log(animations)
     let n = animations.length
 
-    for (let i = 0; i < n; i+=2) {
+    for (let i = 0; i < n; i += 2) {
       const arrayBars = document.getElementsByClassName("histbar")
       setTimeout(() => {
-        let [a,b] = animations[i]
+        let [a, b] = animations[i]
         arrayBars[a].style.backgroundColor = COLOR1 //changes color of the values currently being compared
         arrayBars[b].style.backgroundColor = COLOR1
       }, (22 - animationSpeed) * i)
       setTimeout(() => {
-        let [c,d] = animations[i+1]
+        let [c, d] = animations[i + 1]
         array[c] = d
         setArray([...array])
-        let [a,b] = animations[i]
+        let [a, b] = animations[i]
         arrayBars[a].style.backgroundColor = COLOR2 //changes the color of the bars back to default color
         arrayBars[b].style.backgroundColor = COLOR2
       }, (22 - animationSpeed) * i + (22 - animationSpeed))
@@ -189,125 +189,128 @@ const SortingVisualizer = () => {
 
   return (
     <div className="functionbar">
-      {/* GENERATE RANDOM ARRAY */}
-      <button
-        onClick={() => {
-          arrayType === "Random" ? generateRandomArray() : setType("Random") //Random array button
-        }}
-        disabled={performingAction}
-      >
-        Generate Random Array
-      </button>
+      <div className="buttons">
+        <div className="generate-buttons">
+          {/* GENERATE RANDOM ARRAY */}
+          <button
+            onClick={() => {
+              arrayType === "Random" ? generateRandomArray() : setType("Random") //Random array button
+            }}
+            disabled={performingAction}
+          >
+            Generate Random Array
+          </button>
 
+          {/* GENERATE SORTED ARRAY */}
+          <button
+            onClick={() => {
+              arrayType === "Sorted" ? generateSortedArray() : setType("Sorted") //Sorted array button
+            }}
+            disabled={performingAction}
+          >
+            Generate Sorted Array
+          </button>
 
-      {/* GENERATE SORTED ARRAY */}
-      <button
-        onClick={() => {
-          arrayType === "Sorted" ? generateSortedArray() : setType("Sorted") //Sorted array button
-        }}
-        disabled={performingAction}
-      >
-        Generate Sorted Array
-      </button>
+          {/* GENERATE REVERSE SORTED ARRAY */}
+          <button
+            onClick={() => {
+              arrayType === "Reverse"
+                ? generateReverseSortedArray()
+                : setType("Reverse") //Reverse sorted array button
+            }}
+            disabled={performingAction}
+          >
+            Generate Reverse Sorted Array
+          </button>
+        </div>
 
+        <div className="sort-buttons">
+          {/* BUBBLE SORT */}
+          <button // Bubble sort button
+            onClick={() => {
+              setAction(true)
+              bubbleSort()
+            }}
+            disabled={performingAction}
+          >
+            Bubble Sort
+          </button>
 
-      {/* GENERATE REVERSE SORTED ARRAY */}
-      <button
-        onClick={() => {
-          arrayType === "Reverse"
-            ? generateReverseSortedArray()
-            : setType("Reverse") //Reverse sorted array button
-        }}
-        disabled={performingAction}
-      >
-        Generate Reverse Sorted Array
-      </button>
+          {/* INSERTION SORT */}
+          <button // Insertion sort button
+            onClick={() => {
+              setAction(true)
+              insertionSort()
+            }}
+            disabled={performingAction}
+          >
+            Insertion Sort
+          </button>
 
+          {/* QUICK SORT */}
+          <button // Quicksort button
+            onClick={() => {
+              setAction(true)
+              quickSort()
+            }}
+            disabled={performingAction}
+          >
+            Quick Sort
+          </button>
 
-      {/* BUBBLE SORT */}
-      <button // Bubble sort button
-        onClick={() => {
-          setAction(true)
-          bubbleSort()
-        }}
-        disabled={performingAction}
-      >
-        Bubble Sort
-      </button>
-
-
-      {/* INSERTION SORT */}
-      <button // Insertion sort button
-        onClick={() => {
-          setAction(true)
-          insertionSort()
-        }}
-        disabled={performingAction}
-      >
-        Insertion Sort
-      </button>
-
-
-      {/* QUICK SORT */}
-      <button // Quicksort button
-        onClick={() => {
-          setAction(true)
-          quickSort()
-        }}
-        disabled={performingAction}
-      >
-        Quick Sort
-      </button>
-
-
-      {/* MERGE SORT */}
-      <button // Quicksort button
-        onClick={() => {
-          setAction(true)
-          mergeSort()
-        }}
-        disabled={performingAction}
-      >
-        Merge Sort
-      </button>
-
-
-      <div class="slidecontainer">
-        <input // Set animation speed
-          type="range"
-          min="1"
-          max="20"
-          value={animationSpeed}
-          class="slider"
-          id="myRange"
-          onChange={(e) => {
-            setSpeed(e.target.value)
-          }}
-          disabled={performingAction}
-        />
-        {"Set Animation Speed: "}
-        {animationSpeed}
+          {/* MERGE SORT */}
+          <button // Quicksort button
+            onClick={() => {
+              setAction(true)
+              mergeSort()
+            }}
+            disabled={performingAction}
+          >
+            Merge Sort
+          </button>
+        </div>
       </div>
 
+      <div className="sliders">
+        <div class="slidecontainer">
+          <input // Set animation speed
+            type="range"
+            min="1"
+            max="20"
+            value={animationSpeed}
+            class="slider"
+            id="myRange"
+            onChange={(e) => {
+              setSpeed(e.target.value)
+            }}
+            disabled={performingAction}
+          />
+          <p>
+            {"Animation Speed:"}
+            <div className="array-stats">{animationSpeed}</div>
+          </p>
+        </div>
 
-      <div class="slidecontainer">
-        <input // Set array size
-          type="range"
-          min="20"
-          max="150"
-          value={arraySize}
-          class="slider"
-          id="myRange"
-          onChange={(e) => {
-            setSize(e.target.value)
-            initiateArray()
-          }}
-          disabled={performingAction}
-        />
-        {"Set Array Size: "}
-        {arraySize}
+        <div class="slidecontainer">
+          <input // Set array size
+            type="range"
+            min="20"
+            max="150"
+            value={arraySize}
+            class="slider"
+            id="myRange"
+            onChange={(e) => {
+              setSize(e.target.value)
+              initiateArray()
+            }}
+            disabled={performingAction}
+          />
+          <p>
+            {"Array Size:"}
+            <div className="array-stats">{arraySize}</div>
+          </p>
+        </div>
       </div>
-
 
       <div className="histogram">
         {array.map(
