@@ -44,6 +44,23 @@
 
 }
 
+.slider:disabled:hover {
+    background-color: #ccc;
+
+} 
+
+.slider:disabled::-webkit-slider-thumb {
+    background-color: #888;
+
+}
+
+.slider:disabled::-webkit-slider-thumb:hover {
+    background-color: #888;
+
+}
+
+
+
 .slider:hover {
     background-color: #999;
 
@@ -56,6 +73,7 @@
     background-color: #2a93d5;
     border-radius: 10px;
 }
+
 
 .slider::-webkit-slider-thumb:hover {
     background-color: #2580b9;
@@ -84,4 +102,8 @@ button {
 button:hover {
     color: #2580b9;
     cursor: pointer;
+}
+
+button:disabled {
+    color: #888;
 }
