@@ -42,6 +42,11 @@ const SortingVisualizer = () => {
     initiateArray()
   }, [arrayType])
 
+// changes the array size
+  useEffect(() => {
+    initiateArray()
+  }, [arraySize])
+
   // GENERATE RANDOM ARRAY
   const generateRandomArray = () => {
     let temp = []
@@ -301,7 +306,6 @@ const SortingVisualizer = () => {
             id="myRange"
             onChange={(e) => {
               setSize(e.target.value)
-              initiateArray()
             }}
             disabled={performingAction}
           />
